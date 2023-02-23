@@ -1,25 +1,31 @@
 <?php
 
-if (isset($_POST['add'])) {
-    $content = $_POST['content'];
+$pdo = new PDO('mysql:dbname=todolist;host=localhost;charset=utf8mb4', 'root', '');
+
+
+function addTask($content, $db) {
     $user_id = 1;
     $date = new DateTime();
     $creation_date = $date->format('Y-m-d H:i:s');
 
-    $pdo = new PDO('mysql:dbname=todolist;host=localhost;charset=utf8mb4', 'root', '');
 
-    $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $sql = 'INSERT INTO tasks (content, creation_date, user_id) VALUES (:content, :creation_date, :user_id)';
 
-    $insert = $pdo->prepare($sql);
+    $insert = $db->prepare($sql);
 
     $insert->bindParam(':content', $content);
     $insert->bindParam(':creation_date', $creation_date);
     $insert->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 
     $insert->execute();
+}
+
+if (isset($_POST['add'])) {
+    $content = $_POST['content'];
+    addTask($content, $pdo);
 }
 ?>
 
@@ -31,7 +37,7 @@ if (isset($_POST['add'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vos tâches | To Do List</title>
     <link rel="stylesheet" href="style/style.css">
-    <script src="js/script.js"></script>
+    <script defer src="js/script.js"></script>
 </head>
 <body>
     <h1>Vos tâches</h1>
