@@ -8,26 +8,12 @@ function getAllTasks() {
     $sql = 'SELECT * FROM tasks WHERE user_id = :user_id';
     $select = DbConnection::getDb()->prepare($sql);
     $user_id = 1;
-    $user_tasks = [
-        'created' => [],
-        'completed' => []
-    ];
 
     $select->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 
     if ($select->execute()) {
-        $tasks = $select->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach ($tasks as $task) {
-            if ($task['completion_date'] === null) {
-                $user_tasks['created'][] = $task;
-            } else {
-                $user_tasks['completed'][] = $task;
-            }
-            // yield json_encode($task);
-        }
+        return $select->fetchAll(PDO::FETCH_ASSOC);
     }
-    return $user_tasks;
 }
 
 // $my_tasks = getAllTasks($pdo);

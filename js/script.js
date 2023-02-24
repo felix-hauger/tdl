@@ -4,15 +4,25 @@ function getTasks() {
         .then(response => {
             return response.json();
         })
-        .then(text => {
-            console.log(text);
+        .then(json => {
+            console.log(json);
+            for (const task of json) {
+                if (task.completion_date === null) {
+                    console.log(task)
+                    // code pour tâche inachevées
+
+                } else {
+                    // code pour tâches achevées
+                    
+                }
+            }
         })
         .catch(err => {
             console.error('erreur fetch : ' + err);
         });
 }
 
-getTasks();
+// getTasks();
 
 const mybtn = document.querySelector('#mybtn');
 
