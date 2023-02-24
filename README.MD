@@ -16,3 +16,4 @@ Programme servant à créer une To Do list pour les utilisateurs connectés.
 
 - PHP pour envoyer des requêtes en base de données
 - JavaScript pour les exécuter en asynchrone, sans recharger la page
+- Fichier de configuration .ini
