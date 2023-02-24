@@ -2,11 +2,11 @@
 
 require_once 'class/DbConnection.php';
 
-$pdo = DbConnection::getDb();
+// $pdo = DbConnection::getDb();
 
-function getAllTasks($db) {
+function getAllTasks() {
     $sql = 'SELECT * FROM tasks WHERE user_id = :user_id';
-    $select = $db->prepare($sql);
+    $select = DbConnection::getDb()->prepare($sql);
     $user_id = 1;
     $user_tasks = [
         'created' => [],
@@ -24,16 +24,24 @@ function getAllTasks($db) {
             } else {
                 $user_tasks['completed'][] = $task;
             }
+            // yield json_encode($task);
         }
     }
     return $user_tasks;
 }
 
-$my_tasks = getAllTasks($pdo);
+// $my_tasks = getAllTasks($pdo);
+echo json_encode(getAllTasks());
+// var_dump(json_encode($my_tasks));
+// foreach ($my_tasks['created'] as $task) {
+//     echo '<p>' . $task['content'] . '  ------  ' . $task['creation_date'] . ' --- ' . $task['completion_date'] . '</p>';
+// }
+// foreach ($my_tasks['completed'] as $task) {
+//     echo '<p>' . $task['content'] . '  ------  ' . $task['creation_date'] . ' --- ' . $task['completion_date'] . '</p>';
+// }
+
 // var_dump($my_tasks);
-foreach ($my_tasks['created'] as $task) {
-    echo '<p>' . $task['content'] . '  ------  ' . $task['creation_date'] . ' --- ' . $task['completion_date'] . '</p>';
-}
-foreach ($my_tasks['completed'] as $task) {
-    echo '<p>' . $task['content'] . '  ------  ' . $task['creation_date'] . ' --- ' . $task['completion_date'] . '</p>';
-}
+
+// foreach($my_tasks as $task) {
+//     var_dump($task);
+// }

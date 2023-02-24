@@ -2,7 +2,7 @@
 function getTasks() {
     fetch('task.php')
         .then(response => {
-            return response.text();
+            return response.json();
         })
         .then(text => {
             console.log(text);
