@@ -22,6 +22,9 @@ class DbConnection
             self::$db = new PDO($type . ':dbname=' . $name . ';host=' . $host . ';charset=utf8mb4', $user, $password);
         }
 
+        self::$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+        self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
         return self::$db;
     }
 }
