@@ -1,22 +1,22 @@
 <?php
 
-require_once 'class/DbConnection.php';
+// require_once 'class/DbConnection.php';
 
-function deleteTask($id) {
-    $sql = 'DELETE FROM tasks WHERE id = :id';
+// function deleteTask($id) {
+//     $sql = 'DELETE FROM tasks WHERE id = :id';
 
-    $delete = DbConnection::getDb()->prepare($sql);
+//     $delete = DbConnection::getDb()->prepare($sql);
 
-    $delete->bindParam(':id', $id);
+//     $delete->bindParam(':id', $id);
 
-    if ($delete->execute()) {
-        echo 'task successfully deleted';
-    }
-}
+//     if ($delete->execute()) {
+//         echo 'task successfully deleted';
+//     }
+// }
 
-if (isset($_POST['delete'])) {
-    deleteTask($_POST['delete']);
-}
+// if (isset($_POST['delete'])) {
+//     deleteTask($_POST['delete']);
+// }
 
 ?>
 
