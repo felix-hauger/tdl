@@ -209,6 +209,7 @@ await getTasks();
             })
             .then(data => {
                 console.log(data);
+                document.querySelector('#content').value = '';
                 getTasks();
             })
             .catch(err => {
