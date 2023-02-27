@@ -36,7 +36,7 @@ function getAllTasks($db) {
     return $user_tasks;
 }
 
-function addTask($content, PDO $db) {
+function addTask($content) {
     $user_id = 1;
     $date = new DateTime();
     $creation_date = $date->format('Y-m-d H:i:s');
@@ -55,7 +55,7 @@ function addTask($content, PDO $db) {
 
 if (isset($_POST['add'])) {
     $content = $_POST['content'];
-    addTask($content, $pdo);
+    addTask($content);
 }
 
 $my_tasks = getAllTasks($pdo);
@@ -75,7 +75,7 @@ $my_tasks = getAllTasks($pdo);
 <body>
     <h1>Vos tâches</h1>
     <button id="mybtn">clique</button>
-    <form method="post">
+    <form method="post" id="add-task">
         <input type="text" name="content" id="content" placeholder="Votre tâche">
         <button type="submit" id="add" name="add">Ajouter une tâche</button>
     </form>
@@ -83,9 +83,9 @@ $my_tasks = getAllTasks($pdo);
         <h2>Vos tâches à finir</h2>
         <div class="task-container">
             <?php 
-            foreach ($my_tasks['created_tasks'] as $key => $task) {
-                echo $task['content'] . '  -----  ' . $task['creation_date'] . '<br />';
-            }
+            // foreach ($my_tasks['created_tasks'] as $key => $task) {
+            //     echo $task['content'] . '  -----  ' . $task['creation_date'] . '<br />';
+            // }
             ?>
 
         </div>
@@ -95,9 +95,9 @@ $my_tasks = getAllTasks($pdo);
         <h2>Vos tâches achevées</h2>
         <div class="task-container">
         <?php 
-        foreach ($my_tasks['completed_tasks'] as $key => $task) {
-            echo $task['content'] . '  -----  ' . $task['completion_date'] . '<br />';
-        }
+        // foreach ($my_tasks['completed_tasks'] as $key => $task) {
+        //     echo $task['content'] . '  -----  ' . $task['completion_date'] . '<br />';
+        // }
         ?>
         </div>
     </section>

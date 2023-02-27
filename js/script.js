@@ -10,7 +10,7 @@ function getTasks() {
                 let container;
                 const taskBox = document.createElement('div'),
                     deleteBtn = document.createElement('button'),
-                    content = document.createElement('p'),
+                    content = document.createElement('b'),
                     displayedDate = document.createElement('span');
 
                 content.innerHTML = task.content;
@@ -51,5 +51,30 @@ function getTasks() {
 getTasks();
 
 const mybtn = document.querySelector('#mybtn');
+const add = document.querySelector('#add-task');
+
+function addTask() {
+    const form = document.querySelector('#add-task'),
+        formData = new FormData(form);
+
+    fetch('add.php', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => {
+            return response.text();
+        })
+        .then(data => {
+            console.log(data);
+        })
+        .catch(err => {
+            console.error('erreur création : ' + err);
+        });
+};
+
+add.addEventListener('submit', (event) => {
+    event.preventDefault();
+    addTask();
+})
 
 // mybtn.addEventListener('click', getTasks);
