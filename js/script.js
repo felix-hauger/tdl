@@ -30,8 +30,9 @@
             deleteBtn.setAttribute('name', 'delete');
             deleteBtn.setAttribute('class', 'delete');
             deleteBtn.setAttribute('value', task.id);
-            deleteBtn.addEventListener('click', (event) => {
+            deleteBtn.addEventListener('click', event => {
                 event.preventDefault();
+
                 const formData = new FormData();
 
                 formData.append('delete', deleteBtn.value);
@@ -68,6 +69,29 @@
                 finishBtn.setAttribute('name', 'finish');
                 finishBtn.setAttribute('class', 'finish');
                 finishBtn.setAttribute('value', task.id);
+                finishBtn.addEventListener('click', event => {
+                    event.preventDefault();
+
+                    const formData = new FormData();
+
+                    formData.append('finish',  finishBtn.value);
+
+                    fetch('complete.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                        .then(response => {
+                            return response.text();
+                        })
+                        .then(data => {
+                            console.log(data);
+                            getTasks();
+                        })
+                        .catch(err => {
+                            console.error('erreur de complétion : ' + err);
+                        })
+                });
+
                 category = addedTmp;
 
                 displayedDate.innerHTML = 'ajouté le ' + task.creation_date;
@@ -169,7 +193,7 @@
 
 await getTasks();
 
-    const mybtn = document.querySelector('#mybtn');
+    // const mybtn = document.querySelector('#mybtn');
     const add = document.querySelector('#add-task');
 
     function addTask() {
