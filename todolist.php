@@ -1,3 +1,25 @@
+<?php
+
+require_once 'class/DbConnection.php';
+
+function deleteTask($id) {
+    $sql = 'DELETE FROM tasks WHERE id = :id';
+
+    $delete = DbConnection::getDb()->prepare($sql);
+
+    $delete->bindParam(':id', $id);
+
+    if ($delete->execute()) {
+        echo 'task successfully deleted';
+    }
+}
+
+if (isset($_POST['delete'])) {
+    deleteTask($_POST['delete']);
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
