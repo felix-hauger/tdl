@@ -95,9 +95,9 @@ $my_tasks = getAllTasks($pdo);
         <h2>Vos tâches achevées</h2>
         <div class="task-container">
         <?php 
-            foreach ($my_tasks['completed_tasks'] as $key => $task) {
-                echo $task['content'] . '  -----  ' . $task['completion_date'] . '<br />';
-            }
+        foreach ($my_tasks['completed_tasks'] as $key => $task) {
+            echo $task['content'] . '  -----  ' . $task['completion_date'] . '<br />';
+        }
         ?>
         </div>
     </section>
