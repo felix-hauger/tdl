@@ -1,67 +1,3 @@
-<?php
-
-require_once 'class/DbConnection.php';
-
-$pdo = DbConnection::getDb();
-
-function getAllTasks($db) {
-    $sql = 'SELECT * FROM tasks WHERE user_id = :user_id';
-    $select = DbConnection::getDb()->prepare($sql);
-    $user_id = 1;
-    $user_tasks = [
-        'created' => [],
-        'completed' => []
-    ];
-
-    $select->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-
-    if ($select->execute()) {
-        echo 'ok';
-        $tasks = $select->fetchAll(PDO::FETCH_ASSOC);
-
-        // var_dump($tasks);
-
-        // $created_tasks = [];
-        // $completed_tasks = [];
-        foreach ($tasks as $task) {
-            if ($task['completion_date'] === null) {
-                // $created_tasks[] = $task;
-                $user_tasks['created_tasks'][] = $task;
-            } else {
-                // $completed_tasks[] = $task;
-                $user_tasks['completed_tasks'][] = $task;
-            }
-        }
-    }
-    return $user_tasks;
-}
-
-function addTask($content) {
-    $user_id = 1;
-    $date = new DateTime();
-    $creation_date = $date->format('Y-m-d H:i:s');
-
-
-    $sql = 'INSERT INTO tasks (content, creation_date, user_id) VALUES (:content, :creation_date, :user_id)';
-
-    $insert = DbConnection::getDb()->prepare($sql);
-
-    $insert->bindParam(':content', $content);
-    $insert->bindParam(':creation_date', $creation_date);
-    $insert->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-
-    $insert->execute();
-}
-
-if (isset($_POST['add'])) {
-    $content = $_POST['content'];
-    addTask($content);
-}
-
-$my_tasks = getAllTasks($pdo);
-// var_dump($my_tasks);
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -82,11 +18,6 @@ $my_tasks = getAllTasks($pdo);
     <section id="tofinish">
         <h2>Vos tâches à finir</h2>
         <div class="task-container">
-            <?php 
-            // foreach ($my_tasks['created_tasks'] as $key => $task) {
-            //     echo $task['content'] . '  -----  ' . $task['creation_date'] . '<br />';
-            // }
-            ?>
 
         </div>
     </section>
@@ -94,11 +25,7 @@ $my_tasks = getAllTasks($pdo);
     <section id="achieved">
         <h2>Vos tâches achevées</h2>
         <div class="task-container">
-        <?php 
-        // foreach ($my_tasks['completed_tasks'] as $key => $task) {
-        //     echo $task['content'] . '  -----  ' . $task['completion_date'] . '<br />';
-        // }
-        ?>
+
         </div>
     </section>
 </body>
