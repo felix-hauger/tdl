@@ -1,4 +1,5 @@
 <?php
+
 require_once 'class/DbConnection.php';
 
 function addTask($content) {
