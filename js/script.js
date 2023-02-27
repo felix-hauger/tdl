@@ -6,8 +6,14 @@ function getTasks() {
         })
         .then(json => {
             console.log(json);
+            // using DocumentFragment?
+            const addedTmp = new DocumentFragment(),
+                completedTmp = new DocumentFragment(),
+                added = document.querySelector('#tofinish .task-container'),
+                completed = document.querySelector('#achieved .task-container');
+
             for (const task of json) {
-                let container;
+                let category; // finished or non finished
                 const taskBox = document.createElement('div'),
                     deleteBtn = document.createElement('button'),
                     content = document.createElement('b'),
@@ -21,10 +27,11 @@ function getTasks() {
                 taskBox.append(content);
 
                 if (task.completion_date === null) {
-                    // code pour tâche inachevées
+                    // code for finished tasks
                     // console.log(task)
                     const finishBtn = document.createElement('button');
-                    container = document.querySelector('#tofinish .task-container');
+                    // container = document.querySelector('#tofinish .task-container');
+                    category = addedTmp;
 
                     displayedDate.innerHTML = 'ajouté le ' + task.creation_date;
                     finishBtn.innerHTML = 'Terminer';
@@ -32,16 +39,22 @@ function getTasks() {
                     taskBox.append(displayedDate);
                     taskBox.append(finishBtn);
                 } else {
-                    // code pour tâches achevées
+                    // code for non finished tasks
                     displayedDate.innerHTML = 'terminé le ' + task.completion_date;
-                    container = document.querySelector('#achieved .task-container');
+                    // container = document.querySelector('#achieved .task-container');
+                    category = completedTmp;
 
                     taskBox.append(displayedDate);
                 }
 
                 taskBox.append(deleteBtn);
-                container.append(taskBox);
+                category.append(taskBox);
             }
+
+            added.innerHTML = '';
+            completed.innerHTML = '';
+            added.append(addedTmp);
+            completed.append(completedTmp);
         })
         .catch(err => {
             console.error('erreur fetch : ' + err);
@@ -66,6 +79,7 @@ function addTask() {
         })
         .then(data => {
             console.log(data);
+            getTasks();
         })
         .catch(err => {
             console.error('erreur création : ' + err);
