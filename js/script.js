@@ -14,15 +14,23 @@ function getTasks() {
 
             for (const task of json) {
                 let category; // finished or non finished
-                const taskBox = document.createElement('div'),
+                const taskBox = document.createElement('form'),
                     deleteBtn = document.createElement('button'),
                     content = document.createElement('b'),
                     displayedDate = document.createElement('span');
 
                 content.innerHTML = task.content;
                 deleteBtn.innerHTML = 'Supprimer';
+
                 console.log(task);
-                deleteBtn.setAttribute('id', 'task-' + task.id);
+
+                taskBox.setAttribute('id', 'task-' + task.id);
+                taskBox.setAttribute('method', 'post');
+
+                deleteBtn.setAttribute('type', 'submit');
+                deleteBtn.setAttribute('name', 'delete');
+                // deleteBtn.setAttribute('id', 'delete');
+                deleteBtn.setAttribute('value', task.id);
 
                 taskBox.append(content);
 
@@ -30,6 +38,9 @@ function getTasks() {
                     // code for finished tasks
                     // console.log(task)
                     const finishBtn = document.createElement('button');
+                    finishBtn.setAttribute('type', 'submit');
+                    finishBtn.setAttribute('name', 'finish');
+                    finishBtn.setAttribute('value', task.id);
                     // container = document.querySelector('#tofinish .task-container');
                     category = addedTmp;
 
