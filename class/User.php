@@ -42,37 +42,29 @@ class User
         return $user[0];
     }
 
-    public function register($login, $password, $email, $firstname, $lastname)
+    public function register($email, $password, $firstname, $lastname)
     {
-        // Assign to $email false or $email filtered by filter_var, & throw error if false at the same time
-        if (!$email = filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        // Assign to $checked_email false or $email filtered by filter_var, & throw error if false at the same time
+        if (!$checked_email = filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new Exception('Format email invalide');
+        } elseif ($this->isLoginInDb($checked_email)) {
+            throw new Exception('Adresse mail déjà utilisée');
         } else {
-            $search_logins = $this->verifyLogins($login, $email);
-
-            if ($search_logins['found_login']) {
-                throw new Exception('Le login existe est déjà utilisé');
-            } elseif ($search_logins['found_email']) {
-                throw new Exception('Adresse mail déjà utilisée');
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT, ['cost' => 10]);
+    
+            $sql = 'INSERT INTO users (email, password, firstname, lastname) VALUES (:email, :password, :firstname, :lastname)';
+    
+            $insert = DbConnection::getDb()->prepare($sql);
+    
+            $insert->bindParam(':email', $checked_email);
+            $insert->bindParam(':password', $hashed_password);
+            $insert->bindParam(':firstname', $firstname);
+            $insert->bindParam(':lastname', $lastname);
+    
+            if ($insert->execute()) {
+                return true;
             } else {
-                $hashed_password = password_hash($password, PASSWORD_DEFAULT, ['cost' => 10]);
-
-                $sql = 'INSERT INTO users (login, password, email, firstname, lastname) VALUES (:login, :password, :email, :firstname, :lastname)';
-
-                $insert = DbConnection::getDb()->prepare($sql);
-
-                $insert->bindParam(':login', $login);
-                $insert->bindParam(':password', $hashed_password);
-                $insert->bindParam(':email', $email);
-                $insert->bindParam(':firstname', $firstname);
-                $insert->bindParam(':lastname', $lastname);
-
-                if ($insert->execute()) {
-                    return true;
-                } else {
-                    throw new Exception('Échec lors de l\'inscription');
-                }
-
+                throw new Exception('Échec lors de l\'inscription');
             }
         }
     }
@@ -159,5 +151,6 @@ class User
 
 $user = new User();
 $test = $user->isLoginInDb('admin@admin.com');
+$user->register('tata@tata.com', 'tata', 'tata', 'tata');
 
 var_dump($test);
