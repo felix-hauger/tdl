@@ -5,22 +5,22 @@ class User
     /**
      * @var int identifier in database
      */
-    private int $id;
+    private int $_id;
 
     /**
      * @var string personal info, used for login
      */
-    private string $email;
+    private string $_email;
     
     /**
      * @var string personal info
      */
-    private ?string $firstname;
+    private ?string $_firstname;
     
     /**
      * @var string personal info
      */
-    private ?string $lastname;
+    private ?string $_lastname;
 
     public function __construct()
     {
@@ -81,7 +81,7 @@ class User
      */
     public function getId(): int
     {
-        return $this->id;
+        return $this->_id;
     }
 
     /**
@@ -89,7 +89,7 @@ class User
      */
     public function setId(int $id): self
     {
-        $this->id = $id;
+        $this->_id = $id;
 
         return $this;
     }
@@ -99,7 +99,7 @@ class User
      */
     public function getEmail(): string
     {
-        return $this->email;
+        return $this->_email;
     }
 
     /**
@@ -107,7 +107,7 @@ class User
      */
     public function setEmail(string $email): self
     {
-        $this->email = $email;
+        $this->_email = $email;
 
         return $this;
     }
@@ -117,7 +117,7 @@ class User
      */
     public function getFirstname(): ?string
     {
-        return $this->firstname;
+        return $this->_firstname;
     }
 
     /**
@@ -125,7 +125,7 @@ class User
      */
     public function setFirstname(?string $firstname): self
     {
-        $this->firstname = $firstname;
+        $this->_firstname = $firstname;
 
         return $this;
     }
@@ -135,7 +135,7 @@ class User
      */
     public function getLastname(): ?string
     {
-        return $this->lastname;
+        return $this->_lastname;
     }
 
     /**
@@ -143,7 +143,7 @@ class User
      */
     public function setLastname(?string $lastname): self
     {
-        $this->lastname = $lastname;
+        $this->_lastname = $lastname;
 
         return $this;
     }
