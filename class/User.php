@@ -69,6 +69,39 @@ class User
         }
     }
 
+    public function connect($email, $password)
+    {
+        $sql = 'SELECT id, email, password, firstname, lastname FROM users WHERE email = :email';
+
+        $select = DbConnection::getDb()->prepare($sql);
+
+        $select->bindParam(':login', $email);
+        
+        $select->execute();
+
+        $user = $select->fetch(PDO::FETCH_ASSOC);
+
+        if ($user) {
+
+            // check if password matches
+            if (password_verify($password, $user['password'])) {
+                $this->_id = $user['id'];
+                $this->_email = $user['email'];
+                $this->_firstname = $user['firstname'];
+                $this->_lastname = $user['lastname'];
+                // $this->_infos = $user;
+                // var_dump($this->_infos);
+
+                if (session_status() === PHP_SESSION_ACTIVE) {
+                    // $this->_pdo = null;
+                    $_SESSION['user_id'] = $this->_id;
+                    // $_SESSION['user'] = $this;
+                    return $this;
+                }
+            }
+        }
+        throw new Exception('identifiants incorrects.');
+    }
 
     // public function register($email, $password, $firstname, $lastname)
     // {
