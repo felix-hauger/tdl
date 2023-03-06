@@ -28,7 +28,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vos tâches | To Do List</title>
     <link rel="stylesheet" href="style/style.css">
-    <script defer src="js/script.js"></script>
+    <script defer src="js/todo.js"></script>
 </head>
 <body>
     <h1>Vos tâches</h1>
