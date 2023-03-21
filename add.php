@@ -19,7 +19,7 @@ function addTask($content) {
     $insert->execute();
 }
 
-$content = $_POST['content'];
+$content = htmlspecialchars(trim($_POST['content']), ENT_QUOTES);
 addTask($content);
 
 
