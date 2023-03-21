@@ -6,15 +6,15 @@
         console.log(json);
 
 
-        const addedTmp = new DocumentFragment(),
-            completedTmp = new DocumentFragment(),
-            added = document.querySelector('#tofinish .task-container'),
-            completed = document.querySelector('#achieved .task-container');
+        const addedTmp = new DocumentFragment(), // tmp are to sort tasks by category and add operations on them
+            completedTmp = new DocumentFragment(), // then are appended to task containers in DOM
+            added = document.querySelector('#tofinish .task-container'), // these are to display in html
+            completed = document.querySelector('#achieved .task-container'); // added and completed tasks
 
         for (const task of json) {
-            let category; // finished or non finished
+            let category; // added or completed, to append tasks to tmp DocumentFragment const 
             const taskBox = document.createElement('form'),
-                deleteBtn = document.createElement('button'),
+                deleteBtn = document.createElement('button'), // all tasks can be deleted
                 content = document.createElement('b'),
                 displayedDate = document.createElement('span');
 
@@ -62,8 +62,13 @@
 
             taskBox.append(content);
 
+            // if task has no completion_date, it is not completed
             if (task.completion_date === null) {
-                // code for finished tasks
+                // code for non completed tasks
+
+                category = addedTmp; // to link added task to addedTmp DocumentFragment
+
+                // non completed tasks must have a "finish" button
                 const finishBtn = document.createElement('button');
                 finishBtn.setAttribute('type', 'submit');
                 finishBtn.setAttribute('name', 'finish');
@@ -92,23 +97,24 @@
                         })
                 });
 
-                category = addedTmp;
-
                 displayedDate.innerHTML = 'ajouté le ' + task.creation_date;
                 finishBtn.innerHTML = 'Terminer';
 
                 taskBox.append(displayedDate);
                 taskBox.append(finishBtn);
             } else {
-                // code for non finished tasks
+                // code for completed tasks
+
+                category = completedTmp; // to link completed task to completedTmp DocumentFragment
+
                 displayedDate.innerHTML = 'terminé le ' + task.completion_date;
-                category = completedTmp;
 
                 taskBox.append(displayedDate);
             }
 
             taskBox.append(deleteBtn);
-            category.append(taskBox);
+
+            category.append(taskBox); // append task to defined category, depending if completion_date is null or not
         }
 
 
