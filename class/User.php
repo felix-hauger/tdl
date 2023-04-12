@@ -11,12 +11,12 @@ class User
      * @var string personal info, used for login
      */
     private string $_email;
-    
+
     /**
      * @var string personal info
      */
     private ?string $_firstname;
-    
+
     /**
      * @var string personal info
      */
@@ -37,35 +37,32 @@ class User
 
         $select->execute();
 
-        $user = $select->fetch(PDO::FETCH_NUM);
+        $user = $select->fetch(PDO::FETCH_NUM); //? use fetch column
 
-        return $user[0];
+        return $user[0]; // test if > 0
     }
 
-    public function register($email, $password, $firstname, $lastname)
+    public function register($email, $password, $firstname, $lastname): bool
     {
         // Assign to $checked_email false or $email filtered by filter_var, & throw error if false at the same time
         if (!$checked_email = filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new Exception('Format email invalide');
         } elseif ($this->isLoginInDb($checked_email)) {
+            // var_dump($checked_email);
             throw new Exception('Adresse mail déjà utilisée');
         } else {
             $hashed_password = password_hash($password, PASSWORD_DEFAULT, ['cost' => 10]);
-    
+
             $sql = 'INSERT INTO users (email, password, firstname, lastname) VALUES (:email, :password, :firstname, :lastname)';
-    
+
             $insert = DbConnection::getDb()->prepare($sql);
-    
+
             $insert->bindParam(':email', $checked_email);
             $insert->bindParam(':password', $hashed_password);
             $insert->bindParam(':firstname', $firstname);
             $insert->bindParam(':lastname', $lastname);
-    
-            if ($insert->execute()) {
-                return true;
-            } else {
-                throw new Exception('Échec lors de l\'inscription');
-            }
+
+            return $insert->execute();
         }
     }
 
@@ -89,6 +86,8 @@ class User
                 $this->_email = $user['email'];
                 $this->_firstname = $user['firstname'];
                 $this->_lastname = $user['lastname'];
+
+                // ? store instance in session?
                 // $this->_infos = $user;
                 // var_dump($this->_infos);
 
@@ -182,8 +181,8 @@ class User
     }
 }
 
-$user = new User();
-$test = $user->isLoginInDb('admin@admin.com');
-$user->register('tata@tata.com', 'tata', 'tata', 'tata');
+// $user = new User();
+// $test = $user->isLoginInDb('admin@admin.com');
+// $user->register('tata@tata.com', 'tata', 'tata', 'tata');
 
-var_dump($test);
+// var_dump($test);
