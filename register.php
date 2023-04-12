@@ -10,12 +10,16 @@ if (isset($_POST['submit'])) {
 
     $register_user = new User();
 
-    try {
-        if ($register_user->register($email, $password, $firstname, $lastname)) {
-            $register_success = 'Inscription réussie !';
+    if ($password === $confirm) {
+        try {
+            if ($register_user->register($email, $password, $firstname, $lastname)) {
+                $register_success = 'Inscription réussie !';
+            }
+        } catch (Exception $e) {
+            $register_error = $e->getMessage();
         }
-    } catch (Exception $e) {
-        $register_error = $e->getMessage();
+    } else {
+        $register_error = 'Le mot de passe et la confirmation doivent correspondre';
     }
 }
 
