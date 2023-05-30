@@ -80,7 +80,13 @@ const login = async function() {
             body: formData
         });
 
-        console.log(request.json());
+        let response = await request.text();
+
+        if (response.length > 0) {
+            const messageContainer = document.querySelector('#login-msg');
+
+            messageContainer.innerHTML = response;
+        }
     });
 }
 
