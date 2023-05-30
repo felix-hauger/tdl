@@ -1,6 +1,6 @@
 <?php
 // var_dump($_POST);
-require_once 'class/User.php';
+require_once 'class' . DIRECTORY_SEPARATOR . 'User.php';
 
 if (isset($_POST['email'])) {
 
@@ -15,31 +15,27 @@ if (isset($_POST['email'])) {
     if ($password === $confirm) {
         try {
             if ($register_user->register($email, $password, $firstname, $lastname)) {
-                echo 'Inscription réussie !';
-
-                die();
+                die('Inscription réussie !');
             }
         } catch (Exception $e) {
-            echo $e->getMessage();
-
-            die();
+            die($e->getMessage());
         }
     } else {
-        echo 'Le mot de passe et la confirmation doivent correspondre';
-
-        die();
+        die('Le mot de passe et la confirmation doivent correspondre');
     }
 }
 
 
 ?>
-<form id="register-form" action="" method="post">
-    <input type="email" name="email" id="email" placeholder="Email">
-    <input type="password" name="password" id="password" placeholder="Mot de Passe">
-    <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirmer Mot de Passe">
-    <input type="text" name="firstname" id="firstname" placeholder="Prénom">
-    <input type="text" name="lastname" id="lastname" placeholder="Nom de Famille">
-    <input type="submit" name="submit-register" value="Inscription">
+<div class="container form-container">
+    <form id="register-form" action="" method="post">
+        <input type="email" name="email" id="email" placeholder="Email">
+        <input type="password" name="password" id="password" placeholder="Mot de Passe">
+        <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirmer Mot de Passe">
+        <input type="text" name="firstname" id="firstname" placeholder="Prénom">
+        <input type="text" name="lastname" id="lastname" placeholder="Nom de Famille">
+        <input type="submit" name="submit-register" value="Inscription">
 
-    <p id="register-msg"></p>
-</form>
+        <p id="register-msg" class="form-msg"></p>
+    </form>
+</div>

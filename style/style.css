@@ -1,0 +1,295 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #222d32;
+    background-image: url(../img/PM1132_Ambience.jpeg);
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+h1, h2, h3, p {
+    cursor: default;
+}
+
+:root {
+    --glass-color: rgba(255, 255, 255, .3);
+    --shadow-color: rgba(0, 0, 0, .2);
+}
+
+.form-msg {
+    max-width: 400px;
+    font-family: montserratregular;
+    font-size: 1.1rem;
+    height: 1.1rem;
+    margin-top: 18px;
+    font-weight: 600;
+    color: #222;
+}
+
+body * {
+    font-family: montserratsemibold, Arial, Helvetica;
+}
+
+h1, h2, h3, nav a, input[type="submit"] {
+    font-family: montserratbold, Arial, Helvetica;
+} 
+
+header {
+    position: absolute;
+    top: 0;
+    height: 90px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, .3);
+
+    /* blur behind the element */
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    -moz-backdrop-filter: blur(2px);
+}
+
+header h1, header a, header button {
+    color: #7BBF41;
+    text-shadow: -2px -2px 4px #333;
+    font-weight: 600;
+}
+
+
+header h1 {
+    margin-left: 50px;
+}
+
+header nav {
+    display: flex;
+    font-weight: 600;
+}
+
+header nav button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+header nav a, header nav button {
+    text-decoration: none;
+    font-size: 1.3em;
+    margin-right: 30px;
+    transition: all ease .3s;
+}
+
+header nav a:hover, header nav button:hover {
+    color: #fff;
+    text-shadow: 1px 1px 6px #ddd;
+}
+
+/* ----------- MAIN ---------- */
+
+main {
+    margin-top: 90px;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    min-height: calc(100vh - (160px));
+}
+
+.pfp-container {
+    background-color: var(--glass-color);
+    
+    /* blur behind the element */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -moz-backdrop-filter: blur(10px);
+    border-radius: 50%;
+}
+
+.pfp-container .pfp {
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    border-radius: 50%;
+}
+
+/* .pfp-container .pfp img {
+    height: 100%;
+    /* min-width: 100%; */
+    
+/* }  */
+
+/* ------ INDEX ------ */
+
+.index-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 6rem;
+    color: #7BBF41;
+}
+
+#index-title {
+    font-size: 3rem;
+    text-shadow: 4px 4px 4px #222;
+}
+
+.index-container p {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    font-size: 1.4rem;
+    text-align: center;
+    line-height: 2em;
+    text-shadow: 2px 2px 4px #222;
+    font-weight: 600;
+}
+
+.index-container p a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.index-container p a:hover {
+    text-decoration: underline;
+}
+
+/* ------ FORM ------ */
+
+main .form-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+main .form-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--glass-color);
+    padding: 3rem 6rem;
+    border-radius: 20px;
+    border-left: 1px solid var(--glass-color);
+    border-top: 1px solid var(--glass-color);
+
+    /* blur behind the element */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -moz-backdrop-filter: blur(10px);
+
+    /* box-shadow: x y blur spread color */
+    box-shadow: 20px 20px 40px -6px var(--shadow-color);
+    text-align: center;
+}
+
+main .form-container form h2,
+main .form-container form p {
+    opacity: .9;
+    text-shadow: 2px 2px 4px var(--shadow-color);
+}
+
+main .form-container form h2 {
+    color: #fff;
+    margin-bottom: 2em;
+}
+
+main .form-container form .form-paragraph {
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 1em;
+    line-height: 1.5em;
+}
+
+main .form-container form input,
+main .form-container form textarea {
+    display: block;
+    background-color: transparent;
+    border: none;
+    border-left: 1px solid var(--glass-color);
+    border-top: 1px solid var(--glass-color);
+    padding: 1rem;
+    border-radius: 50px;
+
+    /* blur behind the element */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    -moz-backdrop-filter: blur(5px);
+
+    /* box-shadow: x y blur spread */
+    box-shadow: 4px 4px 60px var(--shadow-color);
+    color: #fff;
+    text-shadow: 2px 2px 4px var(--shadow-color);
+    transition: all .3s;
+    margin-top: 2em;
+    font-weight: 600;
+    outline-color: rgba(50, 50, 50, .3);
+}
+
+main .form-container form input[type='text'],
+main .form-container form input[type='password'],
+main .form-container form textarea {
+    font-size: 1rem;
+}
+
+main .form-container form textarea {
+    padding: 2rem;
+    overflow: hidden;
+}
+
+main .form-container form input:hover,
+main .form-container form input[type='text']:focus,
+main .form-container form input[type='password']:focus,
+main .form-container form textarea:focus,
+main .form-container form textarea:hover {
+    background-color: rgba(255, 255, 255, .1);
+    box-shadow: 4px 4px 60px 8px var(--shadow-color);
+}
+
+main .form-container form input[type='submit'] {
+    cursor: pointer;
+    margin-top: 1.8em;
+    font-size: 1.5rem;
+    width: fit-content;
+}
+
+main .form-container form input::placeholder {
+    color: #ddd;
+}
+
+/* ----------- TODOLIST ---------- */
+
+
+/* ----------- FOOTER ---------- */
+
+footer {
+    background-color: rgba(0, 0, 0, .5);
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+footer a {
+    color: #eee;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer i::before {
+    font-size: 27px;
+    color: #ddd;
+    padding: 8px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    transition: all .3s ease;
+}
+
+footer i:hover::before {
+    color: #333;
+    background-color: #ddd;
+}
