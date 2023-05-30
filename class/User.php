@@ -1,5 +1,7 @@
 <?php
+
 require_once 'DbConnection.php';
+
 class User
 {
     /**
@@ -24,10 +26,16 @@ class User
 
     public function __construct()
     {
-        
     }
 
-    public function isLoginInDb($email): bool
+    /**
+     * To test if email already exists in database
+     * 
+     * @param string $email The searched email
+     * 
+     * @return bool Depend if one result or more is found
+     */
+    private function isEmailInDb(string $email): bool
     {
         $sql = 'SELECT COUNT(id) FROM users WHERE email = :email';
 
@@ -37,17 +45,27 @@ class User
 
         $select->execute();
 
-        $user = $select->fetch(PDO::FETCH_NUM); //? use fetch column
+        $user = $select->fetchColumn(); //? use fetch column
 
-        return $user[0]; // test if > 0
+        return $user > 0;
     }
 
-    public function register($email, $password, $firstname, $lastname): bool
+    /**
+     * To register user in database
+     * 
+     * @param string $email The user email, auth info
+     * @param string $password The user password to auth
+     * @param string $firstname Personal info
+     * @param string $lastname Personal info
+     * 
+     * @return bool Depending if insertion request is successfully executed
+     */
+    public function register(string $email, string $password, string $firstname, string $lastname): bool
     {
         // Assign to $checked_email false or $email filtered by filter_var, & throw error if false at the same time
         if (!$checked_email = filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new Exception('Format email invalide');
-        } elseif ($this->isLoginInDb($checked_email)) {
+        } elseif ($this->isEmailInDb($checked_email)) {
             // var_dump($checked_email);
             throw new Exception('Adresse mail déjà utilisée');
         } else {
@@ -66,47 +84,41 @@ class User
         }
     }
 
-    public function connect($email, $password)
+    /**
+     * To log user in session
+     * 
+     * @param string $email The user email
+     * @param string $password The user password
+     * 
+     * @return self $this filled with user infos to store in session
+     */
+    public function connect(string $email, string $password): self
     {
         $sql = 'SELECT id, email, password, firstname, lastname FROM users WHERE email = :email';
 
         $select = DbConnection::getDb()->prepare($sql);
 
-        $select->bindParam(':login', $email);
-        
+        $select->bindParam(':email', $email);
+
         $select->execute();
 
         $user = $select->fetch(PDO::FETCH_ASSOC);
 
+        // If user is found in database
         if ($user) {
-
-            // check if password matches
+            // Check if passwords match
             if (password_verify($password, $user['password'])) {
                 $this->_id = $user['id'];
                 $this->_email = $user['email'];
                 $this->_firstname = $user['firstname'];
                 $this->_lastname = $user['lastname'];
 
-                // ? store instance in session?
-                // $this->_infos = $user;
-                // var_dump($this->_infos);
-
-                if (session_status() === PHP_SESSION_ACTIVE) {
-                    // $this->_pdo = null;
-                    $_SESSION['user_id'] = $this->_id;
-                    // $_SESSION['user'] = $this;
-                    return $this;
-                }
+                return $this;
             }
         }
+        // Exception if login or password is incorrect
         throw new Exception('identifiants incorrects.');
     }
-
-    // public function register($email, $password, $firstname, $lastname)
-    // {
-    //     $sql = 'INSERT INTO users (email, password, firstname)';
-    // }
-
 
     /**
      * Get the value of id
@@ -180,9 +192,3 @@ class User
         return $this;
     }
 }
-
-// $user = new User();
-// $test = $user->isLoginInDb('admin@admin.com');
-// $user->register('tata@tata.com', 'tata', 'tata', 'tata');
-
-// var_dump($test);
