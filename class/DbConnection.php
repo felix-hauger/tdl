@@ -1,5 +1,7 @@
 <?php
 
+require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'database.php';
+
 class DbConnection
 {
     private static ?PDO $db = null;
@@ -11,15 +13,15 @@ class DbConnection
 
     public static function getDb()
     {
-        $db = parse_ini_file(dirname(__DIR__)  .'/config/database.ini');
-        $type = $db['type'];
-        $name = $db['name'];
-        $host = $db['host'];
-        $user = $db['user'];
-        $password = $db['password'];
+        $type = DB_TYPE;
+        $name = DB_NAME;
+        $host = DB_HOST;
+        $charset = DB_CHARSET;
+        $user = DB_USER;
+        $password = DB_PASSWORD;
 
         if (!self::$db) {
-            self::$db = new PDO($type . ':dbname=' . $name . ';host=' . $host . ';charset=utf8mb4', $user, $password);
+            self::$db = new PDO($type . ':dbname=' . $name . ';host=' . $host . ';charset=' . $charset, $user, $password);
         }
 
         self::$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);

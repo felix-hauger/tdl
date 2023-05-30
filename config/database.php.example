@@ -1,0 +1,27 @@
+<?php
+
+//* ---------- Here is the file to configure database access, if you want to use it in your own server -------------
+
+// ----- Put values between single quotes (') -----
+
+// --- Database credentials ---
+
+//  Database login
+const DB_USER = '';
+
+//  Database password
+const DB_PASSWORD = '';
+
+//  --- Settings ---
+
+//  Host name, your domain where the database is installed
+const DB_HOST = 'localhost';
+
+//  Database name, update if you modified it
+const DB_NAME = 'todolist';
+
+//  Database charset, the character set your database uses
+const DB_CHARSET = 'utf8mb4';
+
+//  Database type : change only if you know what you are doing
+const DB_TYPE = 'mysql';
