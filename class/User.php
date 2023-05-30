@@ -117,8 +117,21 @@ class User
             }
         }
         // Exception if login or password is incorrect
-        throw new Exception('identifiants incorrects.');
+        throw new Exception('Identifiants incorrects.');
     }
+
+    /**
+     * Disconnect user from session
+     */
+    public function disconnect(): void
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        unset($_SESSION['user']);
+    }
+
 
     /**
      * Get the value of id
