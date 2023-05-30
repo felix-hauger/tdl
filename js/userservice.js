@@ -49,7 +49,13 @@ const register = async function() {
             body: formData
         });
 
-        console.log(request);
+        let response = await request.text();
+
+        if (response.length > 0) {
+            const messageContainer = document.querySelector('#register-msg');
+
+            messageContainer.innerHTML = response;
+        }
     });
 }
 
@@ -74,7 +80,7 @@ const login = async function() {
             body: formData
         });
 
-        console.log(request);
+        console.log(request.json());
     });
 }
 

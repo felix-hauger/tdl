@@ -15,13 +15,19 @@ if (isset($_POST['email'])) {
     if ($password === $confirm) {
         try {
             if ($register_user->register($email, $password, $firstname, $lastname)) {
-                $register_success = 'Inscription réussie !';
+                echo 'Inscription réussie !';
+
+                die();
             }
         } catch (Exception $e) {
-            $register_error = $e->getMessage();
+            echo $e->getMessage();
+
+            die();
         }
     } else {
-        $register_error = 'Le mot de passe et la confirmation doivent correspondre';
+        echo 'Le mot de passe et la confirmation doivent correspondre';
+
+        die();
     }
 }
 
@@ -34,9 +40,6 @@ if (isset($_POST['email'])) {
     <input type="text" name="firstname" id="firstname" placeholder="Prénom">
     <input type="text" name="lastname" id="lastname" placeholder="Nom de Famille">
     <input type="submit" name="submit-register" value="Inscription">
-    <?php if (isset($register_error)): ?>
-        <p><?= $register_error ?></p>
-    <?php elseif (isset($register_success)): ?>
-        <p><?= $register_success ?></p>
-    <?php endif ?>
+
+    <p id="register-msg"></p>
 </form>
