@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['user'])) {
+    header('Location: index.php');
+    die();
+}
 
 // require_once 'class/DbConnection.php';
 
@@ -22,6 +28,7 @@
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,25 +37,34 @@
     <link rel="stylesheet" href="style/style.css">
     <script defer src="js/todo.js"></script>
 </head>
+
 <body>
     <h1>Vos tâches</h1>
+
     <button id="mybtn">clique</button>
+
     <form method="post" id="add-task">
         <input type="text" name="content" id="content" placeholder="Votre tâche">
         <button type="submit" id="add" name="add">Ajouter une tâche</button>
     </form>
+
     <section id="tofinish">
         <h2>Vos tâches à finir</h2>
+
         <div class="task-container">
 
         </div>
     </section>
+
     <hr>
+
     <section id="achieved">
         <h2>Vos tâches achevées</h2>
+
         <div class="task-container">
 
         </div>
     </section>
 </body>
+
 </html>

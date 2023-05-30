@@ -54,7 +54,13 @@ const register = async function() {
         if (response.length > 0) {
             const messageContainer = document.querySelector('#register-msg');
 
-            messageContainer.innerHTML = response;
+            messageContainer.innerHTML = response;            
+        }
+
+        if (request.status === 201) {
+            setTimeout(() => {
+                login();
+            }, 2000);
         }
     });
 }
@@ -86,6 +92,12 @@ const login = async function() {
             const messageContainer = document.querySelector('#login-msg');
 
             messageContainer.innerHTML = response;
+        }
+
+        if (request.status === 302) {
+            setTimeout(() => {
+                window.location = 'todolist.php';
+            }, 1500);
         }
     });
 }

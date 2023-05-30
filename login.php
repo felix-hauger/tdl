@@ -16,6 +16,10 @@ if (isset($_POST['email'])) {
         if ($user) {
             $_SESSION['user'] = $user;
 
+            http_response_code(302);
+
+            // header('Location: todolist.php', true, 302);
+
             die('Connexion réussie !');
         }
     } catch (Exception $e) {

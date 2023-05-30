@@ -15,6 +15,8 @@ if (isset($_POST['email'])) {
     if ($password === $confirm) {
         try {
             if ($register_user->register($email, $password, $firstname, $lastname)) {
+                http_response_code(201);
+
                 die('Inscription réussie !');
             }
         } catch (Exception $e) {

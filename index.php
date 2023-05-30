@@ -1,7 +1,7 @@
 <?php
 require_once 'class' . DIRECTORY_SEPARATOR . 'User.php';
 
-session_start(); 
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
