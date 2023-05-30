@@ -18,7 +18,12 @@ session_start();
     <?php require_once 'includes' . DIRECTORY_SEPARATOR . 'header.php' ?>
 
     <main>
-        <div id="form-container"></div>
+        <div id="form-container">
+            <div id="home-container">
+                <h2>Bienvenue sur TODO list !</h2>
+                <p>Connectez-vous pour pouvoir suivre votre TODO list</p>
+            </div>
+        </div>
     </main>
 
     <?php require_once 'includes' . DIRECTORY_SEPARATOR . 'footer.php' ?>
