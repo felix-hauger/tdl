@@ -8,8 +8,12 @@
     <script defer src="js/userservice.js"></script>
 </head>
 <body>
-    <button id="login">Connexion</button>
-    <button id="register">Inscription</button>
-    <div id="form-container"></div>
+    <?php require_once 'includes' . DIRECTORY_SEPARATOR . 'header.php' ?>
+
+    <main>
+        <div id="form-container"></div>
+    </main>
+
+    <?php require_once 'includes' . DIRECTORY_SEPARATOR . 'footer.php' ?>
 </body>
 </html>
