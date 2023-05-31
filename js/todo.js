@@ -2,9 +2,11 @@
 
     async function getTasks() {
         let request = await fetch('task.php');
+
         let json = await request.json();
         console.log(json);
 
+        console.log('get');
 
         const addedTmp = new DocumentFragment(), // tmp are to sort tasks by category and add operations on them
             completedTmp = new DocumentFragment(), // then are appended to task containers in DOM
@@ -197,10 +199,9 @@
         //     });
     }
 
-await getTasks();
+    await getTasks();
 
     // const mybtn = document.querySelector('#mybtn');
-    const add = document.querySelector('#add-task');
 
     function addTask() {
         const form = document.querySelector('#add-task'),
@@ -223,7 +224,13 @@ await getTasks();
             });
     }
 
-    
+    const add = document.querySelector('#add-task');
+
+    add.addEventListener('submit', (event) => {
+        event.preventDefault();
+        addTask();
+    });
+
     // (async function deleteTask() {
     //     const deleteBtns = document.querySelectorAll('.delete');
     //     console.log(deleteBtns);
@@ -267,10 +274,7 @@ await getTasks();
 
     // console.log(deleteBtns);
 
-    add.addEventListener('submit', (event) => {
-        event.preventDefault();
-        addTask();
-    });
+
 
 })()
 

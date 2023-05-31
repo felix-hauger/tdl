@@ -1,8 +1,8 @@
 <?php
 
-require_once 'class/DbConnection.php';
+require_once 'class' . DIRECTORY_SEPARATOR . 'DbConnection.php';
 
-function deleteTask($id) {
+function deleteTask(int $id) {
     $sql = 'DELETE FROM tasks WHERE id = :id';
 
     $delete = DbConnection::getDb()->prepare($sql);

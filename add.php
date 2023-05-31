@@ -1,12 +1,14 @@
 <?php
 
-require_once 'class/DbConnection.php';
+require_once 'class' . DIRECTORY_SEPARATOR . 'DbConnection.php';
+require_once 'class' . DIRECTORY_SEPARATOR . 'User.php';
 
-function addTask($content) {
-    $user_id = 1;
+session_start();
+
+function addTask($content, $user_id) {
     $date = new DateTime();
-    $creation_date = $date->format('Y-m-d H:i:s');
 
+    $creation_date = $date->format('Y-m-d H:i:s');
 
     $sql = 'INSERT INTO tasks (content, creation_date, user_id) VALUES (:content, :creation_date, :user_id)';
 
@@ -16,10 +18,10 @@ function addTask($content) {
     $insert->bindParam(':creation_date', $creation_date);
     $insert->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 
-    $insert->execute();
+    return $insert->execute();
 }
 
 $content = htmlspecialchars(trim($_POST['content']), ENT_QUOTES);
-addTask($content);
+addTask($content, $_SESSION['user']->getId());
 
 
