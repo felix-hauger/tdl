@@ -1,6 +1,12 @@
 <?php
-// var_dump($_POST);
 require_once 'class' . DIRECTORY_SEPARATOR . 'User.php';
+
+session_start();
+
+if (isset($_SESSION['user'])) {
+    header('Location: todolist.php');
+    die();
+}
 
 if (isset($_POST['email'])) {
 
@@ -31,7 +37,7 @@ if (isset($_POST['email'])) {
 ?>
 <div class="container form-container">
     <form id="register-form" action="" method="post">
-        <input type="email" name="email" id="email" placeholder="Email">
+        <input type="email" name="email" id="email" placeholder="Email" autofocus>
         <input type="password" name="password" id="password" placeholder="Mot de Passe">
         <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirmer Mot de Passe">
         <input type="text" name="firstname" id="firstname" placeholder="Prénom">

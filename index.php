@@ -1,7 +1,13 @@
 <?php
+
 require_once 'class' . DIRECTORY_SEPARATOR . 'User.php';
 
 session_start();
+
+if (isset($_SESSION['user'])) {
+    header('Location: todolist.php');
+    die();
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
