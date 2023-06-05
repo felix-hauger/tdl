@@ -12,6 +12,8 @@ if (!isset($_SESSION['user'])) {
 
 $task = new Task();
 
-$content = htmlspecialchars(trim($_POST['content']), ENT_QUOTES);
+if (isset($_POST['content'])) {
+    $content = htmlspecialchars(trim($_POST['content']), ENT_QUOTES);
 
-$task->add($content, $_SESSION['user']->getId());
+    $task->add($content, $_SESSION['user']->getId());
+}

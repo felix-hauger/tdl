@@ -10,6 +10,8 @@ if (!isset($_SESSION['user'])) {
     die();
 }
 
-$task = new Task();
-
-$task->complete($_POST['finish']);
+if (isset($_POST['finish'])) {
+    $task = new Task();
+    
+    $task->complete($_POST['finish']);
+}

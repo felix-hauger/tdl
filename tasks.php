@@ -12,6 +12,4 @@ if (!isset($_SESSION['user'])) {
 
 $user = new User();
 
-$user->setId($_SESSION['user']->getId());
-
-echo json_encode($user->getAllTasks());
+echo json_encode($_SESSION['user']->getAllTasks());
