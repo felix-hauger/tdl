@@ -1,23 +1,7 @@
 <?php
 
-require_once 'class' . DIRECTORY_SEPARATOR . 'DbConnection.php';
+require_once 'class' . DIRECTORY_SEPARATOR . 'Task.php';
 
-function deleteTask(int $id) {
-    $sql = 'DELETE FROM tasks WHERE id = :id';
+$task = new Task();
 
-    $delete = DbConnection::getDb()->prepare($sql);
-
-    $delete->bindParam(':id', $id);
-
-    if ($delete->execute()) {
-        echo $id;
-    }
-}
-
-$to_delete = $_POST['delete'];
-// echo $to_delete;
-deleteTask($to_delete);
-
-// if (deleteTask($_POST['delete'])) {
-//     echo $_POST['delete'];
-// }
+$task->delete($_POST['delete']);

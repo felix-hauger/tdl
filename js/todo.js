@@ -1,7 +1,7 @@
 (async () => {
 
     async function getTasks() {
-        let request = await fetch('task.php');
+        let request = await fetch('tasks.php');
 
         let json = await request.json();
         console.log(json);

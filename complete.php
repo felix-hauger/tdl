@@ -1,15 +1,7 @@
 <?php
 
-require_once 'class' . DIRECTORY_SEPARATOR . 'DbConnection.php';
+require_once 'class' . DIRECTORY_SEPARATOR . 'Task.php';
 
-function completeTask(int $id): bool {
-    $sql = 'UPDATE tasks SET completion_date = NOW() WHERE id = :id';
+$task = new Task();
 
-    $update = DbConnection::getDb()->prepare($sql);
-
-    $update->bindParam('id', $id, PDO::PARAM_INT);
-
-    return $update->execute();
-}
-
-completeTask($_POST['finish']);
+$task->complete($_POST['finish']);
