@@ -14,7 +14,8 @@
             completed = document.querySelector('#achieved .tasks-container'); // Added and completed tasks
 
         for (const task of json) {
-            let category; // Added or completed, to append tasks to tmp DocumentFragment const 
+            let category; // Added or completed, to append tasks to te DocumentFragment const
+
             const taskBox = document.createElement('form'),
                 deleteBtn = document.createElement('button'), // All tasks can be deleted
                 content = document.createElement('p'),

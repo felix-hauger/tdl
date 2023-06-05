@@ -2,61 +2,45 @@ const loginButton = document.querySelector('#login'),
     registerButton = document.querySelector('#register'),
     formContainer = document.querySelector('#form-container');
 
-
-// const register = async function(data) {
-//     const request = await fetch('register.php',{
-
-// })    
-    // const registerForm = document.querySelector('#register-form');
-
-    
-// }
-
-// const login = async function() {
-//     const request = await fetch('login.php');
-
-//     const loginForm = document.querySelector('#login-form');
-
-//     let formData = new FormData(loginForm);
-
-//     loginForm.addEventListener('submit', (event) => {
-//         event.preventDefault();
-//     });
-// }
-
 const register = async function() {
+    // Register page request
     const request = await fetch('register.php');
     
+    // Awaiting response to get html
     const response = await request.text();
     
+    // Insert form in HTML container
     formContainer.innerHTML = response;
     
     const registerForm = document.querySelector('#register-form');
 
-    console.log(registerForm);
+    // Autofocus
+    document.querySelector('#register-form input:first-child').focus();
+
 
     registerForm.addEventListener("submit", async ev => {
+        // Prevent form submission
         ev.preventDefault();
 
         let formData = new FormData(registerForm);
 
-        registerForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-        });
-
+        // Send request with form data
         let request = await fetch('register.php', {
             method: 'post',
             body: formData
         });
 
+        // Get reponse to test
         let response = await request.text();
 
+        // Display response message in form
         if (response.length > 0) {
             const messageContainer = document.querySelector('#register-msg');
 
             messageContainer.innerHTML = response;            
         }
 
+        // If registered successfully & status is 201 (resource created), redirect
         if (request.status === 201) {
             setTimeout(() => {
                 login();
@@ -66,34 +50,43 @@ const register = async function() {
 }
 
 const login = async function() {
+    // Login page request
     const request = await fetch('login.php');
     
+    // Awaiting response to get html
     const response = await request.text();
     
+    // Insert form in HTML container
     formContainer.innerHTML = response;
     
     const loginForm = document.querySelector('#login-form');
 
-    console.log(loginForm);
+    // Autofocus
+    document.querySelector('#login-form input:first-child').focus();
 
     loginForm.addEventListener("submit", async function(ev) {
+        // Prevent form submission
         ev.preventDefault();
 
         let formData = new FormData(loginForm);
 
+        // Send request with form data
         let request = await fetch('login.php', {
             method: 'post',
             body: formData
         });
 
+        // Get reponse to test
         let response = await request.text();
 
+        // Display response message in form
         if (response.length > 0) {
             const messageContainer = document.querySelector('#login-msg');
 
             messageContainer.innerHTML = response;
         }
 
+        // If logged successfully & status is 302, redirect
         if (request.status === 302) {
             setTimeout(() => {
                 window.location = 'todolist.php';
