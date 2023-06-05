@@ -11,16 +11,21 @@ Programme servant à créer une To Do list pour les utilisateurs connectés.
 - Une fonctionnalité pour supprimer une ou plusieurs tâches
 - Un système d'utilisateurs avec inscription et connexion
 
+## Mode d'emploi
+1. Inscrivez-vous
+2. Connectez-vous
+3. Gérez votre todo list
+4. Vous pouvez ensuite vous déconnecter
 
 ## Technologies
 
 - PHP pour envoyer des requêtes en base de données
 - JavaScript pour les exécuter en asynchrone, sans recharger la page
-- Fichier de configuration .ini
+- Base de données SQL (MariaDB)
 
 ## Installation
 
-- Téléchargez ou clonez le dépôt
-- Installez votre base de données avec le fichier todolist.sql dans le dossier resources
-- Retirez le .example de database.php.example
-- Remplissez le fichier database.php avec vos identifiants et autres informations
+1. Téléchargez ou clonez le dépôt
+2. Installez votre base de données avec le fichier todolist.sql dans le dossier resources
+3. Retirez le .example de database.php.example
+4. Remplissez le fichier database.php avec vos identifiants et autres informations
