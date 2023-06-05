@@ -132,6 +132,15 @@ class User
         unset($_SESSION['user']);
     }
 
+    /**
+     * Get all user tasks
+     * 
+     * @return array|false User tasks or false if callback method returned false
+     */
+    public function getAllTasks(): array|false
+    {
+        return Task::getAllByUser($this->_id);
+    }
 
     /**
      * Get the value of id
