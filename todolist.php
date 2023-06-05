@@ -51,12 +51,12 @@ if (!isset($_SESSION['user'])) {
         <div class="todolist-container">
             <h2>Vos tâches</h2>
 
-            <button id="mybtn">clique</button>
-
-            <form method="post" id="add-task">
-                <input type="text" name="content" id="content" placeholder="Votre tâche">
-                <button type="submit" id="add" name="add">Ajouter une tâche</button>
-            </form>
+            <div class="container form-container">
+                <form method="post" id="add-task">
+                    <input type="text" name="content" id="content" placeholder="Votre tâche">
+                    <button type="submit" id="add" name="add">Ajouter une tâche</button>
+                </form>
+            </div>
 
             <section id="tofinish">
                 <h2>Vos tâches à finir</h2>

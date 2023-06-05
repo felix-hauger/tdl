@@ -178,6 +178,7 @@ main .form-container form .form-paragraph {
 }
 
 main .form-container form input,
+main .form-container form button,
 main .form-container form textarea {
     display: block;
     background-color: transparent;
@@ -215,6 +216,7 @@ main .form-container form textarea {
 }
 
 main .form-container form input:hover,
+main .form-container form button:hover,
 main .form-container form input[type='text']:focus,
 main .form-container form input[type='email']:focus,
 main .form-container form input[type='password']:focus,
@@ -224,7 +226,8 @@ main .form-container form textarea:hover {
     box-shadow: 4px 4px 60px 8px var(--shadow-color);
 }
 
-main .form-container form input[type='submit'] {
+main .form-container form input[type='submit'],
+main .form-container form button {
     cursor: pointer;
     margin-top: 1.8em;
     font-size: 1.5rem;
@@ -237,6 +240,21 @@ main .form-container form input::placeholder {
 
 /* ----------- TODOLIST ---------- */
 
+main .form-container form#add-task {
+    margin-top: 60px;
+}
+
+main .form-container form#add-task input[type='text'] {
+    width: 600px;
+}
+
+main .form-container form#add-task button {
+    /* font-size: 20px; */
+    color: #5467BF;
+    text-shadow: 2px 2px 4px var(--glass-color);
+    
+}
+
 main .todolist-container {
     display: flex;
     flex-direction: column;
@@ -246,11 +264,15 @@ main .todolist-container {
     /* min-height: calc(100vh - (160px + 10rem)); */
 }
 
+main .todolist-container .form-container {
+    margin-bottom: 50px;
+}
+/* #417ebf */
 main .todolist-container h2 {
     font-size: 2.3rem;
     color: #7BBF41;
     text-shadow: var(--shadow-color) -6px -4px 10px;
-    margin-top: 1.5em;
+    margin-bottom: 20px;
 }
 
 main .todolist-container hr {
@@ -330,13 +352,15 @@ main .todolist-container .task .finish-task:hover {
 }
 
 main .todolist-container .task .delete-task {
-    border-left: rgba(255, 46, 31, .5);
-    border-top: rgba(255, 46, 31, .5);
-    background-color: rgba(255, 46, 31, .5);
+    
+    border-left: rgba(191, 81, 46, .5);
+    border-top: rgba(191, 81, 46, .5);
+    background-color: rgba(191, 81, 46, .5);
+    /* background-color: rgb(191, 81, 46, .5); */
 }
 
 main .todolist-container .task .delete-task:hover {
-    background-color: rgba(255, 46, 31, .8);
+    background-color: rgba(191, 81, 46, .8);
     box-shadow: 4px 4px 60px 8px var(--shadow-color);
 }
 
