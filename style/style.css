@@ -314,6 +314,7 @@ main .todolist-container .task p {
     font-family: montserratsemibold, Arial, Helvetica;
     width: 70%;
     margin-right: 60px;
+    word-break: break-all;
 }
 
 main .todolist-container .task .finish-task,
