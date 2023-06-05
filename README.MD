@@ -17,3 +17,10 @@ Programme servant à créer une To Do list pour les utilisateurs connectés.
 - PHP pour envoyer des requêtes en base de données
 - JavaScript pour les exécuter en asynchrone, sans recharger la page
 - Fichier de configuration .ini
+
+## Installation
+
+- Téléchargez ou clonez le dépôt
+- Installez votre base de données avec le fichier todolist.sql dans le dossier resources
+- Retirez le .example de database.php.example
+- Remplissez le fichier database.php avec vos identifiants et autres informations
