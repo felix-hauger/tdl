@@ -2,33 +2,11 @@
 require_once 'class' . DIRECTORY_SEPARATOR . 'User.php';
 
 session_start();
-// var_dump($_SESSION['user']);
 
 if (!isset($_SESSION['user'])) {
     header('Location: index.php');
     die();
 }
-
-// var_dump($_SESSION);
-// var_dump($_SESSION['user']->getId());
-// require_once 'class/DbConnection.php';
-
-// function deleteTask($id) {
-//     $sql = 'DELETE FROM tasks WHERE id = :id';
-
-//     $delete = DbConnection::getDb()->prepare($sql);
-
-//     $delete->bindParam(':id', $id);
-
-//     if ($delete->execute()) {
-//         echo 'task successfully deleted';
-//     }
-// }
-
-// if (isset($_POST['delete'])) {
-//     deleteTask($_POST['delete']);
-// }
-
 ?>
 
 <!DOCTYPE html>

@@ -1,5 +1,7 @@
 <?php
+
 require_once 'DbConnection.php';
+
 class Task
 {
     public function __construct()
@@ -17,34 +19,12 @@ class Task
     {
         $sql = 'SELECT * FROM tasks WHERE user_id = :user_id';
         $select = DbConnection::getDb()->prepare($sql);
-        $user_tasks = [
-            'created' => [],
-            'completed' => []
-        ];
 
         $select->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 
         $select->execute();
 
         return $select->fetchAll(PDO::FETCH_ASSOC);
-    
-        if ($select->execute()) {
-            // echo 'ok';
-            $tasks = $select->fetchAll(PDO::FETCH_ASSOC);
-    
-            // var_dump($tasks);
-
-            foreach ($tasks as $task) {
-                if ($task['completion_date'] === null) {
-                    // $created_tasks[] = $task;
-                    $user_tasks['created_tasks'][] = $task;
-                } else {
-                    // $completed_tasks[] = $task;
-                    $user_tasks['completed_tasks'][] = $task;
-                }
-            }
-        }
-        return $user_tasks;
     }
     
     /**

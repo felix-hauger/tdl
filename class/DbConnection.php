@@ -30,6 +30,3 @@ class DbConnection
         return self::$db;
     }
 }
-
-// $mydb = DbConnection::getDb();
-// var_dump($mydb);

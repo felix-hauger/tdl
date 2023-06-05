@@ -18,8 +18,6 @@ if (isset($_POST['email'])) {
 
             http_response_code(302);
 
-            // header('Location: todolist.php', true, 302);
-
             die('Connexion réussie !');
         }
     } catch (Exception $e) {
