@@ -237,6 +237,108 @@ main .form-container form input::placeholder {
 
 /* ----------- TODOLIST ---------- */
 
+main .todolist-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ddd;
+    /* header & footer size + paddings */
+    /* min-height: calc(100vh - (160px + 10rem)); */
+}
+
+main .todolist-container h2 {
+    font-size: 2.3rem;
+    color: #7BBF41;
+    text-shadow: var(--shadow-color) -6px -4px 10px;
+    margin-top: 1.5em;
+}
+
+main .todolist-container hr {
+    margin: 3rem 0 5rem;
+    border-color: #7BBF41;
+    width: 60%;
+}
+
+main .todolist-container .task {
+    width: 800px;
+    background-color: var(--glass-color);
+    border: none;
+    border-left: 1px solid var(--glass-color);
+    border-top: 1px solid var(--glass-color);
+    padding: 30px 40px;
+    margin-bottom: 25px;
+
+    /* blur behind the element */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -moz-backdrop-filter: blur(10px);
+
+    color: #eee;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+
+    position: relative;
+}
+
+main .todolist-container .task .displayed-date {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+}
+
+main .todolist-container .task p {
+    font-family: montserratsemibold, Arial, Helvetica;
+    width: 70%;
+    margin-right: 60px;
+}
+
+main .todolist-container .task .finish-task,
+main .todolist-container .task .delete-task {
+    display: block;
+    border: none;
+
+    padding: .4rem;
+    border-radius: 50px;
+
+    /* blur behind the element */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    -moz-backdrop-filter: blur(5px);
+
+    /* box-shadow: x y blur spread */
+    box-shadow: 4px 4px 60px var(--shadow-color);
+    color: #fff;
+    text-shadow: 2px 2px 4px var(--shadow-color);
+    transition: all .3s;
+    font-weight: 600;
+    outline-color: rgba(50, 50, 50, .3);
+
+    cursor: pointer;
+}
+
+main .todolist-container .task .finish-task {
+    background-color: rgba(220, 220, 220, .5);
+    color: #333;
+    margin-right: 20px;
+}
+
+main .todolist-container .task .finish-task:hover {
+    background-color: rgba(220, 220, 220, .8);
+    box-shadow: 4px 4px 60px 8px var(--shadow-color);
+}
+
+main .todolist-container .task .delete-task {
+    border-left: rgba(255, 46, 31, .5);
+    border-top: rgba(255, 46, 31, .5);
+    background-color: rgba(255, 46, 31, .5);
+}
+
+main .todolist-container .task .delete-task:hover {
+    background-color: rgba(255, 46, 31, .8);
+    box-shadow: 4px 4px 60px 8px var(--shadow-color);
+}
 
 /* ----------- FOOTER ---------- */
 

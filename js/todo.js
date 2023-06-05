@@ -10,27 +10,31 @@
 
         const addedTmp = new DocumentFragment(), // tmp are to sort tasks by category and add operations on them
             completedTmp = new DocumentFragment(), // then are appended to task containers in DOM
-            added = document.querySelector('#tofinish .task-container'), // these are to display in html
-            completed = document.querySelector('#achieved .task-container'); // added and completed tasks
+            added = document.querySelector('#tofinish .tasks-container'), // these are to display in html
+            completed = document.querySelector('#achieved .tasks-container'); // added and completed tasks
 
         for (const task of json) {
             let category; // added or completed, to append tasks to tmp DocumentFragment const 
             const taskBox = document.createElement('form'),
                 deleteBtn = document.createElement('button'), // all tasks can be deleted
-                content = document.createElement('b'),
+                content = document.createElement('p'),
                 displayedDate = document.createElement('span');
 
             content.innerHTML = task.content;
             deleteBtn.innerHTML = 'Supprimer';
 
+            displayedDate.classList.add('displayed-date');
+
             // console.log(task);
 
+            taskBox.classList.add('task');
             taskBox.setAttribute('id', 'task-' + task.id);
             taskBox.setAttribute('method', 'post');
 
+            deleteBtn.classList.add('delete-task');
             deleteBtn.setAttribute('type', 'submit');
             deleteBtn.setAttribute('name', 'delete');
-            deleteBtn.setAttribute('class', 'delete');
+            // deleteBtn.setAttribute('class', 'delete');
             deleteBtn.setAttribute('value', task.id);
             deleteBtn.addEventListener('click', event => {
                 event.preventDefault();
@@ -72,9 +76,10 @@
 
                 // non completed tasks must have a "finish" button
                 const finishBtn = document.createElement('button');
+
+                finishBtn.classList.add('finish-task');
                 finishBtn.setAttribute('type', 'submit');
                 finishBtn.setAttribute('name', 'finish');
-                finishBtn.setAttribute('class', 'finish');
                 finishBtn.setAttribute('value', task.id);
                 finishBtn.addEventListener('click', event => {
                     event.preventDefault();
@@ -99,7 +104,7 @@
                         })
                 });
 
-                displayedDate.innerHTML = 'ajouté le ' + task.creation_date;
+                displayedDate.innerHTML = 'ajouté ' + task.creation_date;
                 finishBtn.innerHTML = 'Terminer';
 
                 taskBox.append(displayedDate);
@@ -109,7 +114,7 @@
 
                 category = completedTmp; // to link completed task to completedTmp DocumentFragment
 
-                displayedDate.innerHTML = 'terminé le ' + task.completion_date;
+                displayedDate.innerHTML = 'terminé ' + task.completion_date;
 
                 taskBox.append(displayedDate);
             }
@@ -201,8 +206,6 @@
 
     await getTasks();
 
-    // const mybtn = document.querySelector('#mybtn');
-
     function addTask() {
         const form = document.querySelector('#add-task'),
             formData = new FormData(form);
@@ -276,7 +279,4 @@
 
 
 
-})()
-
-
-// mybtn.addEventListener('click', getTasks);
+})();

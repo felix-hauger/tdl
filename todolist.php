@@ -48,32 +48,34 @@ if (!isset($_SESSION['user'])) {
     <?php require_once 'includes' . DIRECTORY_SEPARATOR . 'header.php' ?>
 
     <main>
-        <h1>Vos tâches</h1>
+        <div class="todolist-container">
+            <h2>Vos tâches</h2>
 
-        <button id="mybtn">clique</button>
+            <button id="mybtn">clique</button>
 
-        <form method="post" id="add-task">
-            <input type="text" name="content" id="content" placeholder="Votre tâche">
-            <button type="submit" id="add" name="add">Ajouter une tâche</button>
-        </form>
+            <form method="post" id="add-task">
+                <input type="text" name="content" id="content" placeholder="Votre tâche">
+                <button type="submit" id="add" name="add">Ajouter une tâche</button>
+            </form>
 
-        <section id="tofinish">
-            <h2>Vos tâches à finir</h2>
+            <section id="tofinish">
+                <h2>Vos tâches à finir</h2>
 
-            <div class="task-container">
+                <div class="tasks-container">
 
-            </div>
-        </section>
+                </div>
+            </section>
 
-        <hr>
+            <hr>
 
-        <section id="achieved">
-            <h2>Vos tâches achevées</h2>
+            <section id="achieved">
+                <h2>Vos tâches achevées</h2>
 
-            <div class="task-container">
+                <div class="tasks-container">
 
-            </div>
-        </section>
+                </div>
+            </section>
+        </div>
     </main>
 
     <?php require_once 'includes' . DIRECTORY_SEPARATOR . 'footer.php' ?>
